@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 12345
+      # POSTGRES_USER: postgres # creates a user with superuser rights
+      # PGDATA: /var/lib/postgresql/data # sets the data directory
+    ports:
+      - 5632:5432
+    volumes:
+      - ./sources:/tmp/sources
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8280:8080
