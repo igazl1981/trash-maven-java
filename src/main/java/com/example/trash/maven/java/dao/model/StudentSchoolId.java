@@ -6,35 +6,40 @@ import java.util.StringJoiner;
 import java.util.UUID;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+@Embeddable
 public class StudentSchoolId implements Serializable {
-
-    @Column(name = "school_id")
-    private Integer schoolId;
 
     @Column(name = "student_id")
     private UUID studentId;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "school_id")
+    private School school;
+
     public StudentSchoolId() {
     }
 
-    public StudentSchoolId(Integer schoolId, UUID studentId) {
-        this.schoolId = schoolId;
+    public StudentSchoolId(School school, UUID studentId) {
+        this.school = school;
         this.studentId = studentId;
     }
 
-    public Integer getSchoolId() {
-        return schoolId;
+    public School getSchool() {
+        return school;
     }
 
-    public void setSchoolId(Integer schoolId) {
-        this.schoolId = schoolId;
+    public void setSchool(School schoolId) {
+        this.school = schoolId;
     }
 
     @Override
     public String toString() {
         return new StringJoiner(", ", StudentSchoolId.class.getSimpleName() + "[", "]")
-                .add("schoolId=" + schoolId)
+                .add("schoolId=" + school)
                 .add("studentId=" + studentId)
                 .toString();
     }

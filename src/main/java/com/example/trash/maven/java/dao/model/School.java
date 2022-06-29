@@ -24,8 +24,7 @@ public class School {
 
     private String address;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "school_id", referencedColumnName = "id")
+    @OneToMany(mappedBy = "id.school", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Student> students;
 
     @Override
